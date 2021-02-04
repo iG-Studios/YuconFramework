@@ -11,47 +11,64 @@ Let's say you wanted to get a plugin from a script. In this example, let's say w
 
 ```lua
 local ThreadHandler = self:GetPlugin("ThreadHandler") -- Stores the plugin as a variable
---// Do what you want with it
+--// Do what you want with it from this point on
 ```
+
+Remember: `self` in the code directly refers to Yucon Framework API
+
+> You can **not** use `self` outside of methods. For example, you *can* use `self` inside of the **Preload** method, but *not* in the beginning of a script.
 
 ---
 
-# Server Script
-script:Preload [REQUIRED]
-Fires when the script is first called and stored. Use to load any needed data.
-Will yeild other scripts until the preload function is complete.
+# Base API
+*This is API for both client and server scripts and plugins.*
 
-script:Step(delta) [REQUIRED]
-Fires every framework tick (a little over heartbeat time)
-Using this can help avoid using wait()
-delta is the amount of time that passed between frames.
+`self:GetPlugin(pluginName)`
+Requests access to a plugin for use of its functions.
+This would be similar to Lua's built-in method for requiring modules to get the module data.
 
-script:Start [REQUIRED]
-Fires when the script is initialized. Use for main coding.
+If the plugin was a module, it would be using `require(ModulePath)`.
 
-self:GetPlugin(pluginName)
-Requests access to a plugin for use of it’s functions.
+Since we are using Yucon Plugins though, we type something different for a similar function, a.k.a. `self:GetPlugin(PluginNameGoesHere)`
 
-self:ListenToClientEvent(name,function)
+Consider the following example below for getting the Thread Handler plugin:
+```lua
+local ThreadHandler -- Don't initialize the variable yet
+
+function ScriptName:Preload()
+  ThreadHandler = self:GetPlugin("ThreadHandler") -- Gets the thread handler plugin
+end
+
+function ScriptName:Start()
+  print("Yay, script is started!")
+  print("Waiting 5 seconds...")
+  
+  ThreadHandler:Wait(5)
+  
+  print("We waited five seconds! ^-^")
+end
+```
+
+`self:ListenToClientEvent(name,function)`
 Listens to a specified remote event, and connects to the function. Function passes player and it’s arguments.
 
-self:ListenToClientFunction(name,function)
+`self:ListenToClientFunction(name,function)`
 Listens to a specified remote function, and connects to the function. Function passes player and it’s arguments.
 
-self:DisconnectClientEvent(name)
+`self:DisconnectClientEvent(name)`
 Disconnects from specified remote event.
 
-self:DisconnectClientFunction(name)
+`self:DisconnectClientFunction(name)`
 Disconnects from specified remote function.
 
-self:FireClient(player,name,...)
+`self:FireClient(player,name,...)`
 Fires a remote to a client.
 
-self:FireAllClients(name,...)
+`self:FireAllClients(name,...)`
 Fires a remote to all clients.
 
-self:InvokeClient(player,name,...)
+`self:InvokeClient(player,name,...)`
 Invokes a remote to a client.
 
-self:InvokeAllClients(name,...)
+`self:InvokeAllClients(name,...)`
 Invokes a remote to all clients.
