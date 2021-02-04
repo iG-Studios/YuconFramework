@@ -2,6 +2,7 @@
 *This is API for both client and server scripts and plugins.*
 
 `self:GetPlugin(String pluginName)`
+
 Requests access to a plugin for use of its functions.
 This would be similar to Lua's built-in method for requiring modules to get the module data.
 
@@ -30,6 +31,7 @@ end
 ---
 
 `self:ListenToClientEvent(String name,Function function) [CLIENT ONLY]`
+
 Listens to a specified remote event, and connects the function. Function passes player and its arguments.
 
 Think of `name` as the name of a remote event. It otherwise works like `RemoteEvent:OnClientEvent`
@@ -52,6 +54,7 @@ end
 ---
 
 `self:ListenToClientFunction(name,function) [CLIENT ONLY]`
+
 Listens to a specified remote function, and connects the function. Function passes player and its arguments.
 
 Think of `name` as the name of a remote function. It otherwise works like `RemoteFunction.OnClientInvoke`
@@ -71,6 +74,7 @@ end
 ---
 
 `self:DisconnectClientEvent(name) [CLIENT ONLY]`
+
 Disconnects from specified remote event.
 
 Any function connected to the event will no longer work.
@@ -78,6 +82,7 @@ Any function connected to the event will no longer work.
 ---
 
 `self:DisconnectClientFunction(name) [CLIENT ONLY]`
+
 Disconnects from specified remote function.
 
 Any function connected to the event will no longer work.
@@ -85,19 +90,23 @@ Any function connected to the event will no longer work.
 ---
 
 `self:FireClient(player,name,...) [SERVER ONLY]`
+
 Fires a remote event to a client.
 
 ---
 
 `self:FireAllClients(name,...) [SERVER ONLY]`
+
 Fires a remote to all clients.
 
 ---
 
 `self:InvokeClient(player,name,...) [SERVER ONLY]`
+
 Invokes a remote to a client.
 
 ---
 
 `self:InvokeAllClients(name,...) [SERVER ONLY]`
+
 Invokes a remote to all clients.
