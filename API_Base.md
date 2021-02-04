@@ -1,7 +1,7 @@
 # Base API
 *This is API for both client and server scripts and plugins.*
 
-`self:GetPlugin(pluginName)`
+`self:GetPlugin(String pluginName)`
 Requests access to a plugin for use of its functions.
 This would be similar to Lua's built-in method for requiring modules to get the module data.
 
@@ -27,26 +27,77 @@ function ScriptName:Start()
 end
 ```
 
-`self:ListenToClientEvent(name,function)`
-Listens to a specified remote event, and connects to the function. Function passes player and its arguments.
+---
 
-`self:ListenToClientFunction(name,function)`
-Listens to a specified remote function, and connects to the function. Function passes player and its arguments.
+`self:ListenToClientEvent(String name,Function function) [CLIENT ONLY]`
+Listens to a specified remote event, and connects the function. Function passes player and its arguments.
 
-`self:DisconnectClientEvent(name)`
+Think of `name` as the name of a remote event. It otherwise works like `RemoteEvent:OnClientEvent`
+
+Example usage:
+```lua
+local Player = game.Players.LocalPlayer
+
+function ScriptName:Start()
+  self:ListenToClientEvent("ScoreEffect",function(ScoreAmount, IsWinningScore)
+    print(Player.Name .. " got " .. ScoreAmount .. " points!")
+    
+    if IsWinningScore == true then
+      print("Congrats! You won!")
+    end
+  end)
+end
+```
+
+---
+
+`self:ListenToClientFunction(name,function) [CLIENT ONLY]`
+Listens to a specified remote function, and connects the function. Function passes player and its arguments.
+
+Think of `name` as the name of a remote function. It otherwise works like `RemoteFunction.OnClientInvoke`
+
+Example usage:
+```lua
+local MyVeryFrigginCoolWord = "Yucon"
+
+function ScriptName:Start()
+  self:ListenToClientFunction("GetTheWord",function()
+    print("The server wants my very cool word!")
+    return MyFrigginCoolWord
+  end)
+end
+```
+
+---
+
+`self:DisconnectClientEvent(name) [CLIENT ONLY]`
 Disconnects from specified remote event.
 
-`self:DisconnectClientFunction(name)`
+Any function connected to the event will no longer work.
+
+---
+
+`self:DisconnectClientFunction(name) [CLIENT ONLY]`
 Disconnects from specified remote function.
 
-`self:FireClient(player,name,...)`
-Fires a remote to a client.
+Any function connected to the event will no longer work.
 
-`self:FireAllClients(name,...)`
+---
+
+`self:FireClient(player,name,...) [SERVER ONLY]`
+Fires a remote event to a client.
+
+---
+
+`self:FireAllClients(name,...) [SERVER ONLY]`
 Fires a remote to all clients.
 
-`self:InvokeClient(player,name,...)`
+---
+
+`self:InvokeClient(player,name,...) [SERVER ONLY]`
 Invokes a remote to a client.
 
-`self:InvokeAllClients(name,...)`
+---
+
+`self:InvokeAllClients(name,...) [SERVER ONLY]`
 Invokes a remote to all clients.
