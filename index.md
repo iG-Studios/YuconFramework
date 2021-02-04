@@ -7,6 +7,9 @@ Yucon Framework is a lightweight and organized framework. This is targeted towar
 
 The framework is also covered [on the devforum](https://devforum.roblox.com/t/yucon-code-framework-keep-your-code-efficient-effective-and-organized/630895), if you prefer to read light information about it there.
 
+**[API](API.md)** | **[LICENSE](https://raw.githubusercontent.com/iG-Studios/YuconFramework/main/LICENSE)** | **[DOWNLOAD](https://www.roblox.com/library/5196221650/Yucon-Framework)**
+-- | -- | --
+
 ---
 
 # Installation to Studio
@@ -66,7 +69,7 @@ You can add a script via the add-script textbox and buttons.
 
 ![](addscript.jpg)
 
-### Adding a Plugin
+## Adding a Plugin
 You can add a plugin via the add-plugin textbox and buttons.
 * Input a plugin name
 * Press *Client*, *Server*, or *Shared*
@@ -76,3 +79,8 @@ You can add a plugin via the add-plugin textbox and buttons.
 > Shared plugins DO NOT share changes in data, they only share the same base.
 
 ![](addplugin.jpg)
+
+---
+
+# API
+Want to know how the functions inside Yucon work? Take a look at the [API](API.md)!
