@@ -1,3 +1,3 @@
 # Yucon Framework
 
-![Yucon Logo](/yuconlogobig.png)
+![Yucon Logo|50%](/yuconlogobig.png)
