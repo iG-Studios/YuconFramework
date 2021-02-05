@@ -53,7 +53,7 @@ end
 
 ---
 
-`self:ListenToClientFunction(name,function) [CLIENT ONLY]`
+`self:ListenToClientFunction(String name, Function function) [CLIENT ONLY]`
 
 Listens to a specified remote function, and connects the function. Function passes player and its arguments.
 
@@ -73,40 +73,59 @@ end
 
 ---
 
-`self:DisconnectClientEvent(name) [CLIENT ONLY]`
+`self:DisconnectClientEvent(String name) [CLIENT ONLY]`
 
-Disconnects from specified remote event.
+Disconnects from specified remote **event**.
 
 Any function connected to the event will no longer work.
+
+For example, if you used `self:ListenToClientEvent(name,...)` beforehand, disconnecting will render as an "undo" to it, given that you input the same name.
 
 ---
 
 `self:DisconnectClientFunction(name) [CLIENT ONLY]`
 
-Disconnects from specified remote function.
+Disconnects from specified remote **function**.
 
 Any function connected to the event will no longer work.
 
----
-
-`self:FireClient(player,name,...) [SERVER ONLY]`
-
-Fires a remote event to a client.
+For example, if you used `self:ListenToClientFunction(name,...)` beforehand, disconnecting will render as an "undo" to it, given that you input the same name.
 
 ---
 
-`self:FireAllClients(name,...) [SERVER ONLY]`
+`self:FireClient(Instance player, String name, Tuple Args[...]) [SERVER ONLY]`
 
-Fires a remote to all clients.
+Fires a remote **event** to a client.
+
+Think back to the example shown for `self:ListenToClientEvent()`, when *ScoreEffect* was the category.
+
+The event can be traced back to the server, which may have something like:
+
+```lua
+-- (Inside a method)
+self:FireClient(ExamplePlayer, 50, true)
+
+--[[
+  In ExamplePlayer's client output, you would see:
+    ExamplePlayer got 50 points!
+    Congrats! You won!
+--]]
+```
 
 ---
 
-`self:InvokeClient(player,name,...) [SERVER ONLY]`
+`self:FireAllClients(String name, Tuple Args[...]) [SERVER ONLY]`
 
-Invokes a remote to a client.
+Fires a remote to all clients. This is like similar to `self:FireClient()`, except you do not have to input a player (as it performs the action for all players).
 
 ---
 
-`self:InvokeAllClients(name,...) [SERVER ONLY]`
+`self:InvokeClient(player,name,...) [SERVER ONLY] [UNSTABLE]`
 
-Invokes a remote to all clients.
+Invokes a remote to a client. This is similar to `self:FireClient()`, except data can be retrieved.
+
+---
+
+`self:InvokeAllClients(name,...) [SERVER ONLY] [UNSTABLE]`
+
+Invokes a remote to all clients. This is similar to `self:FireAllClients()`, except data can be retrieved.
