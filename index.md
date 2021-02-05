@@ -41,7 +41,7 @@ There are two aspects of the Framework: **Plugins and Scripts**
 
 Scripts | Plugins
 ------- | -------
-Run on their own | Do not run on theur own
+Run on their own | Do not run on their own
 Have many built-in functions | Have functionaly moreso determined by the developer
 Work more like regular scripts/local scripts | Work more like module scripts
 
