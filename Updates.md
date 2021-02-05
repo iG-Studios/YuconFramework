@@ -1,0 +1,21 @@
+# Recent Updates
+
+> 11/24/20
+* `Render`  and  `Step`  methods are now handled differently; instead of a single connection, there is a connection for every script.
+
+> 10/17/20
+* Fixed excessive type-checking
+* Fixed unchecked and unhandled coroutines
+* Fixed issues with embedded modules not being in the correct juxtaposition
+* Fixed a variety of game-breaking issues with remotes
+* You can now update the framework at any time by pressing the "import framework" button, you no longer get a "framework already installed" error
+* Debug tracebacking for `Step`, `Render`, and `Start`.
+
+> 9/8/20
+* Added `Step` method to Client Scripts.
+* Added `ThreadHandler` to the Shared Plugins.
+* Deprecated and Removed `FuncManip` . Its functions are now included in `ThreadHandler` .
+* Added documentation to areas missing it, added ASCII art for Yucon.
+* A couple other tiny changes.
+
+*Previous updates not shown here*
