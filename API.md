@@ -18,5 +18,4 @@ Remember: `self` in the code directly refers to Yucon Framework API
 
 > You can **not** use `self` outside of methods. For example, you *can* use `self` inside of the **Preload** method, but *not* in the beginning of a script.
 
-[Base API](API_Base.md) | [Script-Only API](API_Script.md) | [Plugin API](API_Plugins)
------------------------ | -------------------------------- | -------------------------
+### [Base API](API_Base.md) | [Script-Only API](API_Script.md) | [Plugin API](API_Plugins)
