@@ -7,8 +7,8 @@ Yucon Framework is a lightweight and organized framework. This is targeted towar
 
 The framework is also covered [on the devforum](https://devforum.roblox.com/t/yucon-code-framework-keep-your-code-efficient-effective-and-organized/630895), if you prefer to read light information about it there.
 
-[API](API.md) | [LICENSE](https://raw.githubusercontent.com/iG-Studios/YuconFramework/main/LICENSE) | [DOWNLOAD](https://www.roblox.com/library/5196221650/Yucon-Framework)
--- | -- | --
+[API](API.md) | [LICENSE](https://raw.githubusercontent.com/iG-Studios/YuconFramework/main/LICENSE) | [DOWNLOAD](https://www.roblox.com/library/5196221650/Yucon-Framework) | [UPDATES](Updates.md)
+-- | -- | -- | --
 
 ---
 
