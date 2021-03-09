@@ -1,5 +1,5 @@
 
-![Yucon Logo](/yuconlogo500.png)
+![Yucon Logo](/Main.png)
 
 # Yucon Framework
 
@@ -21,13 +21,13 @@ You will only have to do this once per device.
 
 When installed, you will see the following toolbar in your plugins:
 
-![Yucon Toolbar](/image.png)
+![Yucon Toolbar](/image.jpg)
 
 # Installation to Game
 Installing to a game is very simplistic.
 Simply press *Import Framework* in the toolbar to import the framework.
 
-![Importing the framework](yucondownload.jpg)
+![Importing the framework](initialinstall.jpg)
 
 > For the best organization and optimization, it is recommended you don't install Yucon Framework to existing games. However, it is entirely up to you.
 
