@@ -1,5 +1,14 @@
 # Recent Updates
 
+> 5/10/21
+* Framework client completely reworked
+* Framework server completely reworked
+
+> 3/9/21
+* Remotes work entirely different. Rather than over-complicating it, like it was before, I just decided to some stuff and boom. All issues with remotes thoroughly tested and proven to finally be fixed.
+* New icons for the plugin buttons
+* Animations for blur in/out and notification in
+
 > 11/24/20
 * `Render`  and  `Step`  methods are now handled differently; instead of a single connection, there is a connection for every script.
 
