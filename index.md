@@ -37,47 +37,41 @@ Now that Yucon Framework is completely installed, we can get started on using it
 
 # Using Yucon Framework
 
-There are two aspects of the Framework: **Plugins and Scripts**
-
-Scripts | Plugins
-------- | -------
-Run on their own | Do not run on their own
-Have many built-in functions | Have functionaly moreso determined by the developer
-Work more like regular scripts/local scripts | Work more like module scripts
-
+There are three parts to the Framework: **Scripts**, **Plugins**, and **Classes**
 You can manage them in a variety of ways with the Yucon Editor
 
-![](prompt.jpg)
+## The Initial Menu
+By default, Yucon opens into a collapsed mode that gives you direct access to existing instances, with a button that reads "New Instance" to expand the menu.
+For the best experience, click this button.
 
-## Script Editing
-In the left scrollable frame, you will see a list of scripts.
+![](NewTutorialAA.jpg)
 
-![](scripts.jpg)
+## Using the Explorer
+On the left, you can view existing scripts, plugins, and classes.
+Clicking any of them will immediately open then in the script editor.
 
-Clicking on a script name will open that script for you to edit.
-Editing the code works just like editing code normally with Roblox.
 
-> DO NOT REMOVE PRELOAD, START, STEP, OR RENDER METHODS FROM CODE.
+![](NewTutorialA.jpg)
 
-## Adding a Script
-You can add a script via the add-script textbox and buttons.
-* Input a script name.
-* Press either *Client* or *Server*
-  * Pressing *Client* will create a client script, which will include the additional `Render` function.
-  * Pressing *Server* will create a server script, which won't include the additional `Render` function.
+## Using the Instance Creator
+The instance creator is how you create new instances.
 
-![](addscript.jpg)
+You can:
+* Choose the name
+* Choose the parent/function
+* Choose the style
 
-## Adding a Plugin
-You can add a plugin via the add-plugin textbox and buttons.
-* Input a plugin name
-* Press *Client*, *Server*, or *Shared*
-  * Pressing *Client* or *Server* will make that plugin only usable on the client or server, respectively.
-  * Pressing *Shared* will make the plugin usable by both the client and server. 
+Upon clicking "create," it'll create the instance, add it to the explorer, and open it immediately.
 
-> Shared plugins DO NOT share changes in data, they only share the same base.
+![](NewTutorialB.jpg)
 
-![](addplugin.jpg)
+Scripts | Plugins | Classes |
+------- | ------- | ------- |
+Run entirely on their own like a standard Roblox script | Act like standard Roblox modules, returns data | Works like a plugin, with OOP style
+
+Server | Client | Shared |
+------ | ------ | ------ |
+Runs exclusively on the server, not accessible by the client | Runs exclusively on the client, not accessible by the server | Runs on both client and server |
 
 ---
 
