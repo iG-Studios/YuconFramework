@@ -4,6 +4,7 @@
 * Framework handlers have been further optimized to reduce repititive code
 * `__metatable` added Yucon instances to secure modules better
 * API Documentation has been updated with clear examples, and complete coverage. See it here: https://ig-studios.github.io/YuconFramework/API.html
+* Datastore2 is no longer included as a plugin inside the framework. It has been replaced with loleris's **ProfileService** module.
 * Minor changes
 
 > 5/10/21
