@@ -1,5 +1,11 @@
 # Recent Updates
 
+> 6/10/21
+* Framework handlers have been further optimized to reduce repititive code
+* `__metatable` added Yucon instances to secure modules better
+* API Documentation has been updated with clear examples, and complete coverage. See it here: https://ig-studios.github.io/YuconFramework/API.html
+* Minor changes
+
 > 5/10/21
 * Framework client completely reworked
 * Framework server completely reworked
