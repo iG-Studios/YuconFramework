@@ -22,9 +22,11 @@ Remember: `self` in the code directly refers to Yucon Framework API
 
 # Documentation
 
-All functions are available in *all* types of Yucon instances, **unless otherwise specified**.
+All functions are available in *all* types of Yucon instances, unless otherwise specified.
 
 ---
+
+## Shared Methods
 
 ### `[Plugin] self:GetPlugin(String PluginName)`
 
@@ -44,6 +46,53 @@ end
 ```
 
 ---
+
+### `[any] self:NewInstance(String className, ...)`
+This method will do the following in order:
+* Find a class the developer made with the given name
+* Call the `.New(...)` constructor method of that class, passing all arguments where `...` would be
+* Return the new instance of that class returned by the constructor
+
+To better explain this, consider the below code, found in a class named "Ball:"
+```
+local Ball = {}
+Ball.__index = Ball
+
+--// Constructor
+
+function Ball.New(Name, Radius)
+	local self = {}
+	self.Name = Name
+	self.Radius = Radius
+	
+	return setmetatable(self, Ball)
+end
+
+--// Methods
+
+function Ball:PrintVolume()
+	local Volume = 4/3 * math.pi * self.Radius ^ 3
+	print("The ball named" .. self.Name .. "has a volume of " .. Volume .. " units cubed.")
+end
+
+return Ball
+```
+
+Now, let's consider some more code, which is located in a script.
+
+```
+function MyScript:Start()
+	local MyBall = self:NewInstance("Ball", "MySpecialBall", 3)
+	MyBall:PrintVolume()
+end
+```
+
+This code will print:
+*"The ball named MySpecialBall has a volume of 113.097336 units cubed."*
+
+---
+
+## Server-only methods
 
 ### `[void] {SERVER-ONLY} self:ListenToClientEvent(String Name, function DedicatedFunction)`
 
@@ -126,49 +175,59 @@ Use `FireAllClients` instead.
 
 ---
 
-### `[any] self:NewInstance(String className, ...)`
-This method will do the following in order:
-* Find a class the developer made with the given name
-* Call the `.New(...)` constructor method of that class, passing all arguments where `...` would be
-* Return the new instance of that class returned by the constructor
+## Client-only methods
 
-To better explain this, consider the below code, found in a class named "Ball:"
-```
-local Ball = {}
-Ball.__index = Ball
+### `[void] {CLIENT-ONLY} self:ListenToServerEvent(String Name, Function function)`
+This listens to a remote **event**, and any data sent from the server to the specified remote will pass to the specified function.
 
---// Constructor
+Both `self:FireClient` and `self:FireAllClients`, which are triggered from the *server*, can invoke the function passed into this method.
 
-function Ball.New(Name, Radius)
-	local self = {}
-	self.Name = Name
-	self.Radius = Radius
-	
-	return setmetatable(self, Ball)
-end
-
---// Methods
-
-function Ball:PrintVolume()
-	local Volume = 4/3 * math.pi * self.Radius ^ 3
-	print("The ball named" .. self.Name .. "has a volume of " .. Volume .. " units cubed.")
-end
-
-return Ball
-```
-
-Now, let's consider some more code, which is located in a script.
+For example, let's say we have a round system on the server, which fires a remote named "Timer," and this is telling all of the clients how much time is left in a game. On the server, it will use a line of code such as `self:FireAllClients("Timer", TimeLeft)` to send this data. On the client, we have:
 
 ```
-function MyScript:Start()
-	local MyBall = self:NewInstance("Ball", "MySpecialBall", 3)
-	MyBall:PrintVolume()
-end
+self:ListenToServerEvent("Timer", function(TimeLeft)
+	print("Timer ticked! Time left: " .. TimeLeft)
+	--// Do whatever here
+end)
 ```
-
-This code will print:
-*"The ball named MySpecialBall has a volume of 113.097336 units cubed."*
 
 ---
 
-# Documentation IN PROGRESS!
+### `[void] {CLIENT-ONLY} self:ListenToServerFunction(String name, Function function)`
+This listens to a remote **function**, and any data sent from the server to the specified remote will pass to the specified function.
+
+This works similarly to `self:ListenToServerEvent`
+
+This is not documented, as it is not recommended the developer uses this.
+
+---
+
+### `[void] {CLIENT-ONLY} self:DisconnectServerEvent(String name)`
+If you used `self:ListenToServerEvent`, use this method to disconnect a remote event of the same name.
+
+---
+
+### `[void] {CLIENT-ONLY} self:DisconnectServerFunction(String name)`
+If you used `self:ListenToServerFunction`, use this method to disconnect a remote function of the same name.
+
+---
+
+### `[void] {CLIENT-ONLY} self:FireServer(String name, ...)`
+Sends information from the client to the server, given the remote name and any additional arguments the developer may add.
+
+The below example sends the phrase "your mom" to the server, through the remote named "meme channel".
+```
+function asdasd:Start()
+	local Player = game.Players:WaitForChild("iGottic")
+	self:FireClient(Player, "meme channel", "your mom")
+end
+```
+
+---
+
+### `[Tuple] {CLIENT-ONLY} self:InvokeServer(String name, ...)`
+Sends information from the client to the server, given the remote name and any additional arguments the developer may add, and may recieve information in return from the server.
+
+This is like `self:FireServer`, except this can have information returned.
+
+---
