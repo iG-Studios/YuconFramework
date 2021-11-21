@@ -1,5 +1,21 @@
 # Recent Updates
 
+> 11/21/21
+* Fixed an issue where remote functions would not return data from the server back to the client upon a client-to-server request
+* The plugin-side code has been entirely rewritten
+* Importing and updating the framework is much faster (near-instant)
+* Fixed some issues related to module navigation UI not updating properly
+* `MAJOR_YUCON_VERSION` no longer attempts to import. This may be deleted from your game, this was a legacy method of checking Yucon import status
+* Upon opening a game that already has Yucon Framework installed, the developer will get a notification letting them know Yucon is active
+
+> 11/6/21
+* Added `:GetClass()` method to the API. This allows a user to access a class without creating a new object!
+* Minor optimizations to the Yucon Framework
+* Changed default cases of camelCase to PascalCase
+* Added new default `Spring` shared class
+* Added new default `Bind` client class
+* Removed the default `ThreadHandler` shared plugin (it has been superseded by the `task` library from Roblox)
+
 > 6/10/21
 * Framework handlers have been further optimized to reduce repititive code
 * `__metatable` added Yucon instances to secure modules better
