@@ -92,6 +92,16 @@ This code will print:
 
 ---
 
+### `[Class] self:GetClass(String ClassName)`
+
+Returns a class instance with the given class name.
+Unlike `self:NewInstance`, this does NOT return an object of a class, but rather, it returns the class itself.
+
+This may be used to access class-wide methods not available to a class object.
+
+---
+
+
 ## Server-only methods
 
 ### `[void] {SERVER-ONLY} self:ListenToClientEvent(String Name, function DedicatedFunction)`
