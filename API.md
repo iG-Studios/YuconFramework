@@ -228,8 +228,7 @@ Sends information from the client to the server, given the remote name and any a
 The below example sends the phrase "your mom" to the server, through the remote named "meme channel".
 ```
 function asdasd:Start()
-	local Player = game.Players:WaitForChild("iGottic")
-	self:FireClient(Player, "meme channel", "your mom")
+	self:FireServer("meme channel", "your mom")
 end
 ```
 
