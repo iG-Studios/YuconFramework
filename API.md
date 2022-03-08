@@ -1,47 +1,46 @@
 # Yucon Framework API Page
 This is the **API** for Yucon Framework.
-Below are sorted function descriptions for Yucon scripts and plugins.
+Below are sorted method and functions descriptions for Yucon instances.
 
-# Understanding the API
-Whenever `script` is referenced, it is referring to the Yucon Script. The same description applies for the term `plugin`.
-The word `self` would be what you actually type in a Yucon Plugin or Script.
+![](/TERMINOLOGY.png)
+
+There are certain terms you need to keep in mind while reading the API!
+
+A Yucon "instance" is a script, class, or plugin. All instances share the Yucon functionality.
+
+Whenever `script` is referenced in code examples, it is referring to the Yucon instance. The same description applies for the term `plugin`.
+The word `self` would be what you actually type in a Yucon instance to refer to the framework functionality.
 
 ### Example
-Let's say you wanted to get a plugin from a script. In this example, let's say we want to use the *ThreadHandler* plugin.
+A perfectly common example would be wanting to use `ProfileService`, a plugin that handles data saving for the player.
+However, we need to know how to actually know where it is. We can use `self` to refer to Yucon Framework, and from there, call `GetPlugin()` to get `ProfileService`.
 
 ```lua
-local ThreadHandler = self:GetPlugin("ThreadHandler") -- Stores the plugin as a variable
+local ProfileService = self:GetPlugin("ProfileService") -- Stores the plugin as a variable
 --// Do what you want with it from this point on
 ```
 
-Remember: `self` in the code directly refers to Yucon Framework API
+Remember: `self` in the code directly refers to Yucon Framework API!
 
 > You can **not** use `self` outside of methods. For example, you *can* use `self` inside of the **Preload** method, but *not* in the beginning of a script.
 
 ---
 
-# Documentation
-
-All functions are available in *all* types of Yucon instances, unless otherwise specified.
-
----
-
-## Shared Methods
+![](SHARED.png)
 
 ### `[Plugin] self:GetPlugin(String PluginName)`
 
 Returns a plugin instance with the given plugin name.
 It will look for plugins only in the same server/client parent (client to client, server to server), or for a shared parent.
+This can only return a plugin, NOT a script or plugin.
 
 The below example waits 5 seconds using the thread handler plugin, and then prints text.
 
 ```
-function MyScript:Preload()
-  local ThreadHandler = self:GetPlugin("ThreadHandler")
-  
-  ThreadHandler:Wait(5) -- Wait 5 seconds with precision
-  
-  print("Waited 5 seconds!")
+function MyServerScript:Start()
+	local ProfileService = self:GetPlugin("ProfileService") -- Store profile service as a variable
+	
+	ProfileService.GetProfileStore("Index", {}) -- We can then use profile service :)
 end
 ```
 
@@ -49,7 +48,7 @@ end
 
 ### `[any] self:NewInstance(String className, ...)`
 This method will do the following in order:
-* Find a class the developer made with the given name
+* Find a class with the given name (if it exists)
 * Call the `.New(...)` constructor method of that class, passing all arguments where `...` would be
 * Return the new instance of that class returned by the constructor
 
@@ -99,10 +98,64 @@ Unlike `self:NewInstance`, this does NOT return an object of a class, but rather
 
 This may be used to access class-wide methods not available to a class object.
 
+
 ---
 
+### `[void] {UNRELEASED} self:ListenToFramework(String eventName, Function bindedFunction)`
 
-## Server-only methods
+*This is unreleased functionality and will not work until the next version of Yucon is released.*
+
+This is a replication of the `BindableEvent` object for Roblox. In other words, this acts a remote between scripts of the same parent.
+For example, firing this on the client will also cause the client to hear it, but the server will not hear it.
+
+```
+self:ListenToFramework("ShowUI", function(UiName, ...)
+	PlayerGuiList[UiName].Visible = true
+end)
+```
+
+---
+
+### `[void] {UNRELEASED} self:DisconnectFromFramework(String eventName)`
+
+*This is unreleased functionality and will not work until the next version of Yucon is released.*
+
+To connect to the framework event, you use `ListenToFramework`. As such, you can stop listening by using the counter: `self:DisconnectFromFramework()`
+
+---
+
+### `[Instance] {UNRELEASED} self:GetSharedAsset(String assetName, Boolean? recurseSearch)`
+
+*This is unreleased functionality and will not work until the next version of Yucon is released.*
+
+Gets an instance stored in the `ASSETS` folder in `ReplicatedStorage`, or nil if it does not exist.
+
+If `recurseSearch` is set to `true`, then the search will continue until the instance is not `nil`.
+
+---
+
+### `[void] {UNRELEASED} self:FireScripts(String eventName, ...)`
+
+*This is unreleased functionality and will not work until the next version of Yucon is released.*
+
+This provokes any connections that have binded to the framework event of the specified name.
+
+The below code fires the code example from `self:ListenToFramework()`:
+
+```
+self:FireScripts("ShowUI", "MainGui")
+```
+
+
+---
+
+### `[void] {UNRELEASED} self:Warn(...)`
+
+*This is unreleased functionality and will not work until the next version of Yucon is released.*
+
+A more descriptive version of Luau's built in `warn` method.
+
+![](/SERVER.png)
 
 ### `[void] {SERVER-ONLY} self:ListenToClientEvent(String Name, function DedicatedFunction)`
 
@@ -157,9 +210,10 @@ Sends information from the server to a single specified client, given the remote
 
 The below example sends the number `5`, and the word `banana` to a client, via a remote named `howmanyfruit`:
 ```
-function asdasd:Start()
-	local Player = game.Players:WaitForChild("iGottic")
-	self:FireClient(Player, "howmanyfruit", 5, "banana")
+function MyServerScript:Start()
+	local Player = Players:WaitForChild("iGottic")
+	
+	self:FireClient(Player, "FruitGivingRemote", 5, "Bananas")
 end
 ```
 
@@ -185,7 +239,30 @@ Use `FireAllClients` instead.
 
 ---
 
-## Client-only methods
+### `[void] {UNRELEASED} {SERVER-ONLY} self:ListenToServerClose(Function bindedFunction)`
+
+*This is unreleased functionality and will not work until the next version of Yucon is released.*
+
+When the server closes (such as when all players leave, when it shuts down, migrates an update, etc.), the function `bindedFunction` will be called.
+
+```
+self:ListenToServerClose(function()
+	print("Oh no, the server is closing!")
+end)
+```
+
+
+---
+
+### `[Instance] {UNRELEASED} {SERVER-ONLY} self:GetAsset(String assetName, Boolean? recurseSearch)`
+
+*This is unreleased functionality and will not work until the next version of Yucon is released.*
+
+Gets an instance stored in the `ASSETS` folder in `ServerStorage`, or nil if it does not exist.
+
+If `recurseSearch` is set to `true`, then the search will continue until the instance is not `nil`.
+
+![](CLIENT.png)
 
 ### `[void] {CLIENT-ONLY} self:ListenToServerEvent(String Name, Function function)`
 This listens to a remote **event**, and any data sent from the server to the specified remote will pass to the specified function.
@@ -227,9 +304,10 @@ Sends information from the client to the server, given the remote name and any a
 
 The below example sends the phrase "your mom" to the server, through the remote named "meme channel".
 ```
-function asdasd:Start()
-	local Player = game.Players:WaitForChild("iGottic")
-	self:FireClient(Player, "meme channel", "your mom")
+function MyClientScript:Start()
+	local WeaponName = "PaintballGun"
+	
+	self:FireServer("GiveWeaponRemote", WeaponName)
 end
 ```
 
@@ -241,3 +319,9 @@ Sends information from the client to the server, given the remote name and any a
 This is like `self:FireServer`, except this can have information returned.
 
 ---
+
+### `[void] {UNRELEASED} self:GetGui(String GuiName, Boolean? recurseSearcj, number?)`
+
+*This is unreleased functionality and will not work until the next version of Yucon is released.*
+
+Retrieve a `ScreenGui` under `PlayerGui`, by it's name, with the options to yeild, until a Gui has loaded.
