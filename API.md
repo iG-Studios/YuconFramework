@@ -101,9 +101,7 @@ This may be used to access class-wide methods not available to a class object.
 
 ---
 
-### `[void] {UNRELEASED} self:ListenToFramework(String eventName, Function bindedFunction)`
-
-*This is unreleased functionality and will not work until the next version of Yucon is released.*
+### `[void] self:ListenToFramework(String eventName, Function bindedFunction)`
 
 This is a replication of the `BindableEvent` object for Roblox. In other words, this acts a remote between scripts of the same parent.
 For example, firing this on the client will also cause the client to hear it, but the server will not hear it.
@@ -116,17 +114,13 @@ end)
 
 ---
 
-### `[void] {UNRELEASED} self:DisconnectFromFramework(String eventName)`
-
-*This is unreleased functionality and will not work until the next version of Yucon is released.*
+### `[void] self:DisconnectFromFramework(String eventName)`
 
 To connect to the framework event, you use `ListenToFramework`. As such, you can stop listening by using the counter: `self:DisconnectFromFramework()`
 
 ---
 
-### `[Instance] {UNRELEASED} self:GetSharedAsset(String assetName, Boolean? recurseSearch)`
-
-*This is unreleased functionality and will not work until the next version of Yucon is released.*
+### `[Instance] self:GetSharedAsset(String assetName, Boolean? recurseSearch)`
 
 Gets an instance stored in the `ASSETS` folder in `ReplicatedStorage`, or nil if it does not exist.
 
@@ -134,9 +128,7 @@ If `recurseSearch` is set to `true`, then the search will continue until the ins
 
 ---
 
-### `[void] {UNRELEASED} self:FireScripts(String eventName, ...)`
-
-*This is unreleased functionality and will not work until the next version of Yucon is released.*
+### `[void] self:FireScripts(String eventName, ...)`
 
 This provokes any connections that have binded to the framework event of the specified name.
 
@@ -149,9 +141,7 @@ self:FireScripts("ShowUI", "MainGui")
 
 ---
 
-### `[void] {UNRELEASED} self:Warn(...)`
-
-*This is unreleased functionality and will not work until the next version of Yucon is released.*
+### `[void] self:Warn(...)`
 
 A more descriptive version of Luau's built in `warn` method.
 
@@ -239,9 +229,7 @@ Use `FireAllClients` instead.
 
 ---
 
-### `[void] {UNRELEASED} {SERVER-ONLY} self:ListenToServerClose(Function bindedFunction)`
-
-*This is unreleased functionality and will not work until the next version of Yucon is released.*
+### `[void] {SERVER-ONLY} self:ListenToServerClose(Function bindedFunction)`
 
 When the server closes (such as when all players leave, when it shuts down, migrates an update, etc.), the function `bindedFunction` will be called.
 
@@ -254,9 +242,7 @@ end)
 
 ---
 
-### `[Instance] {UNRELEASED} {SERVER-ONLY} self:GetAsset(String assetName, Boolean? recurseSearch)`
-
-*This is unreleased functionality and will not work until the next version of Yucon is released.*
+### `[Instance] {SERVER-ONLY} self:GetAsset(String assetName, Boolean? recurseSearch)`
 
 Gets an instance stored in the `ASSETS` folder in `ServerStorage`, or nil if it does not exist.
 
@@ -320,8 +306,6 @@ This is like `self:FireServer`, except this can have information returned.
 
 ---
 
-### `[void] {UNRELEASED} self:GetGui(String GuiName, Boolean? recurseSearcj, number?)`
-
-*This is unreleased functionality and will not work until the next version of Yucon is released.*
+### `[void] self:GetGui(String GuiName, Boolean? recurseSearcj, number?)`
 
 Retrieve a `ScreenGui` under `PlayerGui`, by it's name, with the options to yeild, until a Gui has loaded.
